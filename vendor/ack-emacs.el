@@ -64,7 +64,7 @@ defined by the ack-command variable."
 While ack runs asynchronously, you can use the \\[next-error] command to
 find the text that ack hits refer to. The command actually run is
 defined by the ack-command variable."
-  (interactive (list (read-string "Search for: " (thing-at-point 'symbol))))
+  (interactive (list (read-string "Ack for (in app root): " (thing-at-point 'symbol))))
  
   (let (compile-command
         (compilation-error-regexp-alist grep-regexp-alist)
