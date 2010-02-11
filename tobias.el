@@ -68,6 +68,7 @@
 (global-set-key "\C-cfs" 'rinari-find-stylesheet)
 (global-set-key "\C-cft" 'rinari-find-test)
 (global-set-key "\C-cfv" 'rinari-find-view)
+(global-set-key "\C-cfa" 'ack-in-project)
 
 (add-to-list 'load-path (concat dotfiles-dir "vendor"))
 
