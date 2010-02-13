@@ -121,3 +121,8 @@
 
 (load (concat dotfiles-dir "topfunky-theme.el"))
 (color-theme-topfunky)
+
+;; make ido list files vertically
+(setq ido-decorations
+      (quote
+       ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
