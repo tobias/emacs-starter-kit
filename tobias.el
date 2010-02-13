@@ -126,3 +126,20 @@
 (setq ido-decorations
       (quote
        ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+
+(require 'linum)
+
+;; right justify line number with a space afterward
+(setq linum-format
+      (lambda (line)
+        (propertize
+         (format
+          (let ((w (length
+                    (number-to-string
+                     (count-lines (point-min) (point-max))))))
+            (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
+
+(global-linum-mode 1)
+
+;; disable fringe
+(set-fringe-mode 0)
