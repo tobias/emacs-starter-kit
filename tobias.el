@@ -143,3 +143,5 @@
 
 ;; disable fringe
 (set-fringe-mode 0)
+
+(require 'comment-ruby)
