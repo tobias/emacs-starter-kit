@@ -19,6 +19,44 @@ the comment block, depending on whether point is START or END when called."
       (insert start-text))
     (goto-line end-line)))
 
+(defun marker-regex (marker)
+  (concat "^" marker " *$"))
+
+(defun match-and-remove-block-marker (marker)
+  (save-excursion
+    (if (re-search-forward (marker-regex marker) nil t)
+        (progn
+          (replace-match "")
+          (delete-char 1)
+          t)
+      nil)))
+    
+(defun uncomment-ruby-block (beginning-point)
+  (save-excursion
+    (goto-char beginning-point)
+    (and (match-and-remove-block-marker "=begin")
+        (match-and-remove-block-marker "=end"))))
+
+(defun point-in-ruby-comment-blockp (point)
+  (save-excursion
+    (goto-char point)
+    (let ((begin-point (re-search-backward (marker-regex "=begin") nil t))
+           (end-point (re-search-forward (marker-regex "=end") nil t)))
+      (and begin-point
+           end-point
+           (> point begin-point)
+           (< point end-point)
+           begin-point))))
+
+(defun goop ()
+  (interactive)
+  (let ((p (point-in-blockp (point))))
+    (message "%s" p)
+    (uncomment-ruby-block p)
+    )
+  )
+  
+
 (defun comment-ruby-line ()
   "Comments out the current line with # and returns the number of chars inserted."
   (interactive)
@@ -27,9 +65,30 @@ the comment block, depending on whether point is START or END when called."
     (insert "# ")
     2))
 
+(defun uncomment-ruby-line ()
+  "Uncomments the current line when it has been commented with #"
+  (interactive)
+  (save-excursion
+    (back-to-indentation)
+    (if (char-equal (char-after) ?#)
+        (progn
+          (delete-char 1)
+          (ruby-indent-line)
+          1)
+      0)))
+
+(defun uncomment-ruby-region-each-line (start end)
+  "Uncomments each line individually between START and END"
+  (interactive "r")
+  (comment-operation-on-each-line start end '(uncomment-ruby-line)))
+
 (defun comment-ruby-region-each-line (start end)
   "Comments each line individually between START and END"
   (interactive "r")
+  (comment-operation-on-each-line start end '(comment-ruby-line)))
+
+(defun comment-operation-on-each-line (start end op)
+  "Runs op on each line between START and END"
   (forward-line (if (= start (point))
                     -1
                   (if (bolp) 0 1)))
@@ -39,7 +98,7 @@ the comment block, depending on whether point is START or END when called."
         (setq end (- end 1)))
     (goto-char start)
     (while (<= (line-number-at-pos) (line-number-at-pos end))
-      (setq end (+ end (comment-ruby-line)))
+      (setq end (+ end (eval op)))
       (forward-line 1))))
 
 (defun comment-ruby-region (start end)
