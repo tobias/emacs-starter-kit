@@ -164,7 +164,7 @@
            (set-window-start w1 s2)
            (set-window-start w2 s1)))))
 
-(global-set-key [ (control c) (control s) ] 'swap-windows)
+(global-set-key "\C-cs" 'swap-windows)
 
 (require 'comment-ruby)
 
