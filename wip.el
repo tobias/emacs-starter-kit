@@ -7,7 +7,9 @@
    (list (read-string "Generate what? ")
          (read-string "Args: ")))
   (setq buffer (get-buffer-create (format "* generate %s output *" type))
-        command (format "ruby %sscript/generate %s %s" (rinari-root) type args))
-  (message "Running: %s" command)
+        command (format "ruby %sscript/generate %s %s" (rinari-root) type args)
+        (message "Running: %s" command))
   (shell-command command buffer)
   (switch-to-buffer-other-window buffer))
+
+

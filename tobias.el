@@ -167,11 +167,9 @@
 (global-set-key "\C-cs" 'swap-windows)
 
 (require 'comment-ruby)
+(require 'rinari-extensions)
+
+(load (concat dotfiles-dir "yasnippet-init.el"))
 
 (when window-system (set-face-font `default "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))
 
-(add-to-list 'load-path
-             "~/.emacs.d/yasnippet")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet/snippets")
