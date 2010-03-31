@@ -13,3 +13,17 @@
   (switch-to-buffer-other-window buffer))
 
 
+(defun count-chars-in-region (start end)
+  "thisandthat."
+  (interactive "r")
+  (message "%d characters" (- end start)))
+
+(defun count-phrase-in-region (start end phrase)
+  "thisandthat."
+  (interactive (list "r" (read-string "phrase: ")))
+  (save-excursion
+    (let ((count 0))
+      (goto-char start)
+      (while (re-search-forward phrase end t)
+        (setq count (1+ count)))
+      (message "'%s' occurred %d times" phrase count))))
