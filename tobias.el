@@ -184,4 +184,7 @@
    (if selective-display nil (or column 3))))
 
 (global-set-key "\C-ct" 'toggle-selective-display)
-(global-set-key "\C-cgs" 'git-status)
+
+(global-set-key "\C-cgs" '(lambda ()
+                            (interactive)
+                            (git-status ".")))
