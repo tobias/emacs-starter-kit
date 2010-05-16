@@ -188,3 +188,11 @@
 (global-set-key "\C-cgs" '(lambda ()
                             (interactive)
                             (git-status ".")))
+
+(defun open-trace-and-file (tracefile file linenum)
+  "Open visit TRACEFILE in one window (in compilation mode), and visit FILE at LINENUM in another"
+  (find-file-other-window tracefile)
+  (goto-line 2)
+  (compilation-mode)
+  (find-file-other-window file)
+  (goto-line linenum))
