@@ -188,3 +188,5 @@
 (global-set-key "\C-cgs" '(lambda ()
                             (interactive)
                             (git-status ".")))
+
+(server-start)
