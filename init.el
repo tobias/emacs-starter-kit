@@ -33,7 +33,7 @@
 
 (require 'cl)
 (require 'saveplace)
-(require 'ffap)
+;(require 'ffap)
 (require 'uniquify)
 (require 'ansi-color)
 (require 'recentf)
@@ -63,6 +63,12 @@
 
 (regen-autoloads)
 (load custom-file 'noerror)
+
+;; emacs 23 breaks the command -> meta mapping. This fixes it.
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier nil)
 
 ;; You can keep system- or user-specific customizations here
 (setq system-specific-config (concat dotfiles-dir system-name ".el")

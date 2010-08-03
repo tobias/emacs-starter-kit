@@ -194,7 +194,17 @@
 (defun open-trace-and-file (tracefile file linenum)
   "Open visit TRACEFILE in one window (in compilation mode), and visit FILE at LINENUM in another"
   (find-file-other-window tracefile)
-  (goto-line 2)
   (compilation-mode)
+  (goto-line 2)
   (find-file-other-window file)
   (goto-line linenum))
+
+(load (concat dotfiles-dir "echo-area-bell.el"))
+
+(setq exec-path '("/Users/tobias/bin"
+                  "/opt/local/bin"
+                  "/opt/local/sbin"
+                  "/usr/bin"
+                  "/sbin"
+                  "/usr/local/bin"))
+(setenv "PATH" (mapconcat 'identity exec-path ":"))
