@@ -208,3 +208,5 @@
                   "/sbin"
                   "/usr/local/bin"))
 (setenv "PATH" (mapconcat 'identity exec-path ":"))
+
+(setq-default ispell-program-name "aspell")
