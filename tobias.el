@@ -210,3 +210,11 @@
 (setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 (setq-default ispell-program-name "aspell")
+
+(setq initial-frame-alist
+      (cons '(cursor-type . bar) 
+            (copy-alist initial-frame-alist)))
+
+(setq default-frame-alist 
+      (cons '(cursor-type . bar)
+            (copy-alist default-frame-alist)))
