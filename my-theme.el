@@ -1,0 +1,5 @@
+(add-to-list 'load-path (concat dotfiles-dir "vendor/color-theme"))
+(require 'color-theme)
+(color-theme-initialize)
+(load "topfunky-theme.el")
+(color-theme-topfunky)
