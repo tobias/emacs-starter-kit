@@ -74,4 +74,12 @@
 
 (mouse-avoidance-mode 'animate)
 
+(require 'windmove)
+(windmove-default-keybindings)
+
+;;; Maximize window
+(require 'maxframe)
+(add-hook 'window-setup-hook 'maximize-frame t)
+
 (server-start)
+
