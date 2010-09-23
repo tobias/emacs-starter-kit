@@ -20,3 +20,4 @@ session*
 tramp
 \#*
 .auth
+vendor/twittering-mode

@@ -38,3 +38,24 @@
   (goto-line 2)
   (find-file-other-window file)
   (goto-line linenum))
+
+(defun yank-to-gist ()
+  "yank from the top of the kill ring, create a gist from it, and insert the gist url at the point"
+  (interactive)
+  (save-excursion
+    (let ((buffer (current-buffer)))
+            (set-buffer (get-buffer-create "*yank-to-gist*"))
+            (yank)
+            (gist-region
+             (point-min)
+             (point-max)
+             t
+             (lexical-let ((buf buffer))
+               (function (lambda (status)
+                           (let ((location (cadr status)))
+                             (set-buffer buf)
+                             (message "Paste created: %s" location)
+                             (insert location)
+                             (kill-new location))))))
+            (kill-buffer))))
+

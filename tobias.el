@@ -6,6 +6,7 @@
 (load "my-defuns.el")
 (load "my-git.el")
 (load "my-theme.el")
+(load "my-twitter.el")
 
 
 
@@ -15,3 +16,12 @@
 
 
 
+
+
+
+
+
+
+
+
+                     
