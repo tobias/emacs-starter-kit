@@ -84,5 +84,10 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+; make completion buffers disappear after 10 seconds.
+(add-hook 'completion-setup-hook
+  (lambda () (run-at-time 10 nil
+    (lambda () (kill-buffer "*Completions*")))))
+
 (server-start)
 

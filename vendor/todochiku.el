@@ -1,5 +1,5 @@
 ;;; todochiku.el - A mode for interfacing with Growl, Snarl, and the like.
-(defconst todochiku-version "0.0.7.a")
+(defconst todochiku-version "0.0.7.b")
 
 ;; Copyright (c)2008 Jonathan Arkell. (by)(nc)(sa)  Some rights reserved.
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
@@ -97,7 +97,8 @@
 ;; - Build better backend support.
 
 ;;; CHANGELOG:
-;; V0.7   - Added YaOddMuse interface
+;; V0.0.7b - Added support for sticky messages for libnotify and growl.
+;; V0.0.7  - Added YaOddMuse interface
 ;; V0.0.6.1 - Bugfixing fom Jason McBrayer  (thanks!)
 ;; V0.0.6 - Added patches from Jason McBrayer for *nix notifications.
 ;; V0.0.5 - Added Initial support for emacs only notification
@@ -333,3 +334,4 @@ This would be better done through a customization probably."
 (provide 'growl)
 
 (provide 'todochiku)
+

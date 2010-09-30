@@ -13,12 +13,15 @@
   (irc-connect-redhat)
   (irc-connect-freenode))
 
+
 (defun growl-when-mentioned (match-type nick message)
   "Shows a growl notification, when user's nick was mentioned."
-  (unless (posix-string-match "^\\** *Users on #" message)
-    (growl
+  (unless (posix-string-match "^\\*\\*\\*" message)
+    (todochiku-message
      (concat "<" (substring nick 0 (string-match "!" nick)) "> on " (buffer-name (current-buffer)))
      message
+     ""
+     (posix-string-match "tcrawley" message)
      )))
 (add-hook 'erc-text-matched-hook 'growl-when-mentioned)
 
@@ -26,8 +29,6 @@
   (lambda (nick)
     (interactive (list (completing-read "Query nick: " erc-channel-users)))
     (erc-cmd-QUERY nick)))
-
-(define-key erc-mode-map (kbd "C-c l") (lambda () (interactive) (erc-cmd-LIST)))
 
 (define-key erc-mode-map (kbd "C-c y") `yank-to-gist)
 
@@ -37,15 +38,6 @@
             (erc-propertize (concat (erc-default-target) ">") 'read-only t 'rear-nonsticky t 'front-nonsticky t)
           (erc-propertize (concat "ERC>") 'read-only t 'rear-nonsticky t 'front-nonsticky t))))
 
-;(defun log-it (msg)
-;  ""
-;  (save-excursion
-;    (message msg)))
-;
-;(defun log-it2 ()
-;  ""
-;   (message (concat (buffer-name) (buffer-substring (point-min) (point-max)))))
 
-;(add-hook 'erc-insert-pre-hook 'log-it)
-;(add-hook 'erc-insert-pre-hook 'log-it2)
-
+(require 'erc-summarize)
+(erc-summarize-add-hooks)

@@ -59,3 +59,8 @@
                              (kill-new location))))))
             (kill-buffer))))
 
+(defun fix-tb-stack ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "at " nil t)
+    (replace-match "\nat " nil t)))
