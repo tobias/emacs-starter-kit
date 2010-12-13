@@ -6,12 +6,13 @@
 
 (defun erc-summarize-message ()
   ""
-  (let ((msg (buffer-substring (point-min) (point-max)))
-        (buffer-name (buffer-name)))
-    (set-buffer (erc-summarize-buffer))
-    (goto-char (point-max))
-    (and (posix-string-match "^[*<][^*]" msg)
-         (insert (erc-summarize-format-message buffer-name msg)))))
+  (save-excursion
+    (let ((msg (buffer-substring (point-min) (point-max)))
+          (buffer-name (buffer-name)))
+      (set-buffer (erc-summarize-buffer))
+      (goto-char (point-max))
+      (and (posix-string-match "^[*<][^*]" msg)
+           (insert (erc-summarize-format-message buffer-name msg))))))
 
 (defun erc-summarize-format-message (buffer-name msg)
   (let ((prefix (format "%s [%s] " buffer-name (substring (current-time-string) 11 16)))

@@ -21,9 +21,9 @@
 
 (global-set-key (kbd "M-RET") 'hippie-expand)
 
-(global-set-key "\C-cgs" '(lambda ()
-                            (interactive)
-                            (git-status ".")))
+;(global-set-key "\C-cgs" '(lambda ()
+;                            (interactive)
+;                            (git-status ".")))
 
 (make-hippie-expand-function
  '(try-expand-dabbrev-visible
